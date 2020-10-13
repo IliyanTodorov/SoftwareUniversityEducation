@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\SharedTrip",
+    "\\SharedTrip\\Data",
+    "\\SharedTrip\\Models",
+    "\\SIS.MvcFramework"
+  ],
+  "SelectedNode": "\\SharedTrip\\Data\\ApplicationDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}
