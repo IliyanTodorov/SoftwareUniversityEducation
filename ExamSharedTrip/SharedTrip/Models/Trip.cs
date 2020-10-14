@@ -6,6 +6,11 @@
 
     public class Trip
     {
+        public Trip()
+        {
+            this.Users = new HashSet<UserTrip>();
+        }
+
         public string Id { get; set; }
 
         [Required]
@@ -28,6 +33,6 @@
 
         public string ImagePath { get; set; }
 
-        public IEnumerable<UserTrip> UserTrips { get; set; }
+        public ICollection<UserTrip> Users { get; set; }
     }
 }

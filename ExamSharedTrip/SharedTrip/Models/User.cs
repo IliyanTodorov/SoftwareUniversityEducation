@@ -3,10 +3,14 @@
     using SIS.MvcFramework;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class User
     {
+        public User()
+        {
+            this.Trips = new HashSet<UserTrip>();
+        }
+
         public string Id { get; set; }
 
         [Required]
@@ -22,9 +26,8 @@
         [MaxLength(20)]
         public string Password { get; set; }
 
-        public IEnumerable<UserTrip> UserTrips { get; set; }
+        public ICollection<UserTrip> Trips { get; set; }
 
-        [Column(TypeName = "bigint")]
         public IdentityRole Role { get; set; }
     }
 }

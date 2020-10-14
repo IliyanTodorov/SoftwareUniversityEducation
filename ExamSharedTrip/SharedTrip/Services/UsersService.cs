@@ -34,26 +34,25 @@
             return user.Id;
         }
 
-        public string GetUsername(string id)
-        {
-            var username = this.db.Users
-                .Where(x => x.Id == id)
-                .Select(x => x.Username)
-                .FirstOrDefault();
-            return username;
-        }
+        //public string GetUsername(string id)
+        //{
+        //    var username = this.db.Users
+        //        .Where(x => x.Id == id)
+        //        .Select(x => x.Username)
+        //        .FirstOrDefault();
+        //    return username;
+        //}
 
         public void Register(string username, string email, string password)
         {
             var user = new User
             {
                 Id = Guid.NewGuid().ToString(),
-                Role = IdentityRole.User,
                 Username = username,
                 Email = email,
+                Role = IdentityRole.User,
                 Password = this.Hash(password),
             };
-
             this.db.Users.Add(user);
             this.db.SaveChanges();
         }

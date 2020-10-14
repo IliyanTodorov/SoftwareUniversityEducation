@@ -20,7 +20,7 @@
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(DatabaseConfiguration.ConnectionString);
+            optionsBuilder.UseSqlServer(DatabaseConfiguration.ConnectionString, s => s.MigrationsAssembly("SharedTrip"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,13 +30,13 @@
 
             modelBuilder.Entity<UserTrip>()
                 .HasOne(ut => ut.User)
-                .WithMany(ut => ut.UserTrips)
+                .WithMany(ut => ut.Trips)
                 .HasForeignKey(ut => ut.UserId);
 
             modelBuilder.Entity<UserTrip>()
                 .HasOne(ut => ut.Trip)
-                .WithMany(ut => ut.UserTrips)
-                .HasForeignKey(ut => ut.TripId);                
+                .WithMany(ut => ut.Users)
+                .HasForeignKey(ut => ut.TripId);
         }
     }
 }
