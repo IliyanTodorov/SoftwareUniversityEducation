@@ -24,6 +24,7 @@
             return this.View();
         }
 
+
         [HttpPost]
         public HttpResponse Login(LoginInputModel input)
         {
@@ -32,7 +33,7 @@
             if (userId != null)
             {
                 this.SignIn(userId);
-                return this.Redirect("/");
+                return this.Redirect("/Trips/All");
             }
 
             return this.Redirect("/Users/Login");

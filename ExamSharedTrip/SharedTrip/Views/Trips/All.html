@@ -12,19 +12,22 @@
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">StartPoint</th>
-                        <td>EndPoint</td>
-                        <td>DepartureTime</td>
-                        <td>Seats</td>
-                        <td>
-                            <div class="button-holder">
-                                <a href="/Trips/Details?tripId=Id" class="btn btn-info text-uppercase">Info</a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@item.StartPoint</th>
+                            <td>@item.EndPoint</td>
+                            <td>@item.DepartureTime</td>
+                            <td>@item.Seats</td>
+                            <td>
+                               <div class="button-holder">
+                                   <a href="/Trips/Details?tripId=@item.Id" class="btn btn-info text-uppercase">Info</a>
+                               </div>
+                             </td>
+                        </tr>
+                    </tbody>
+                }
             </table>
         </div>
     </div>
