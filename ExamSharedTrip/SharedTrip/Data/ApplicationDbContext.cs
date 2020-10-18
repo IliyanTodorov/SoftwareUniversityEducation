@@ -28,15 +28,15 @@
             modelBuilder.Entity<UserTrip>()
             .HasKey(t => new { t.UserId, t.TripId });
 
-            //modelBuilder.Entity<UserTrip>()
-            //    .HasOne(ut => ut.User)
-            //    .WithMany(ut => ut.Trips)
-            //    .HasForeignKey(ut => ut.UserId);
+            modelBuilder.Entity<UserTrip>()
+                .HasOne(ut => ut.User)
+                .WithMany(ut => ut.Trips)
+                .HasForeignKey(ut => ut.UserId);
 
-            //modelBuilder.Entity<UserTrip>()
-            //    .HasOne(ut => ut.Trip)
-            //    .WithMany(ut => ut.Users)
-            //    .HasForeignKey(ut => ut.TripId);
+            modelBuilder.Entity<UserTrip>()
+                .HasOne(ut => ut.Trip)
+                .WithMany(ut => ut.Users)
+                .HasForeignKey(ut => ut.TripId);
         }
     }
 }

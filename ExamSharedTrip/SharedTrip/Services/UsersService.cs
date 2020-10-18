@@ -2,6 +2,7 @@
 {
     using SharedTrip.Models;
     using SIS.MvcFramework;
+    using System;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
@@ -46,6 +47,7 @@
         {
             var user = new User
             {
+                Id = Guid.NewGuid().ToString(),
                 Username = username,
                 Email = email,
                 Role = IdentityRole.User,

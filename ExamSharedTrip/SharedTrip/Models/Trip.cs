@@ -8,7 +8,6 @@
     {
         public Trip()
         {
-            this.Id = Guid.NewGuid().ToString();
             this.Users = new HashSet<UserTrip>();
         }
 
@@ -22,7 +21,7 @@
 
         [Required]
         [DisplayFormat(DataFormatString = "{dd.MM.yyyy HH:mm}")]
-        public DateTime DepartureTime { get; set; } 
+        public DateTime DepartureTime { get; set; }
 
         [Required]
         [Range(2, 6)]

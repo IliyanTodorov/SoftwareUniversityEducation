@@ -18,7 +18,7 @@
             : base(name, value)
         {
             this.Path = "/";
-            this.SameSite = SameSiteType.Lax;
+            this.SameSite = SameSiteType.None;
             this.Expires = DateTime.UtcNow.AddDays(30);
         }
 
