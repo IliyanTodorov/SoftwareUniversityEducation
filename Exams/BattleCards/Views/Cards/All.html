@@ -3,7 +3,7 @@
     @foreach (var card in Model)
     {
     <div class="card col-6 col-lg-3 game-card">
-        <img src="@card.ImageUrl"
+        <img src="@card.ImageURL"
              class="card-img-top img-fluid card-image">
         <div class="card-body">
             <h5 class="card-title text-center" data-toggle="tooltip" data-placement="bottom"
@@ -11,12 +11,12 @@
                 @card.Name
             </h5>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">@card.Type</li>
+                <li class="list-group-item text-center">@card.Keyword</li>
                 <li class="list-group-item">
                     <span class="attack-stat">@card.Attack</span><span class="health-stat">@card.Health</span>
                 </li>
             </ul>
-            <a href="/Cards/AddToCollection?cardId=@card.Id" class="btn btn-block btn-primary">Add to collection</a>
+            <a href="/Cards/AddToCollection?cardId=@card.Id" class="btn btn-block btn-primary">Add to Collection</a>
         </div>
     </div>
     }

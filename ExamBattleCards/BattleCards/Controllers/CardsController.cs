@@ -4,6 +4,7 @@
     using BattleCards.ViewModels.Cards;
     using SIS.HTTP;
     using SIS.MvcFramework;
+    using System;
 
     public class CardsController : Controller
     {
@@ -14,7 +15,7 @@
             this.cardsService = cardsService;
         }
 
-        [HttpGet]
+        // GET /cards/add
         public HttpResponse Add()
         {
             if (!this.IsUserLoggedIn())
@@ -26,58 +27,55 @@
         }
 
         [HttpPost]
-        public HttpResponse Add(CardAddInputModel inputModel)
+        public HttpResponse Add(AddCardInputModel model)
         {
             if (!this.IsUserLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            if (string.IsNullOrEmpty(inputModel.Name) || inputModel.Name.Length < 5 || inputModel.Name.Length > 15)
+            if (string.IsNullOrEmpty(model.Name) || model.Name.Length < 5 || model.Name.Length > 15)
             {
-                return this.View();
+                return this.Error("Name should be between 5 and 15 characters long.");
             }
 
-            if (string.IsNullOrEmpty(inputModel.Description) || inputModel.Description.Length > 200 || inputModel.Description.Length < 10)
+            if (string.IsNullOrWhiteSpace(model.Image))
             {
-                return this.View();
+                return this.Error("The image is required!");
             }
 
-            if (string.IsNullOrEmpty(inputModel.ImageURL))
+            if (!Uri.TryCreate(model.Image, UriKind.Absolute, out _))
             {
-                return this.View();
+                return this.Error("Image url should be valid.");
             }
 
-            if (inputModel.Attack < 0)
+            if (string.IsNullOrWhiteSpace(model.Keyword))
+            {
+                return this.Error("Keyword is required.");
+            }
+
+            if (model.Attack < 0)
             {
                 return this.Error("Attack should be non-negative integer.");
             }
 
-            if (inputModel.Health < 0)
+            if (model.Health < 0)
             {
                 return this.Error("Health should be non-negative integer.");
             }
 
-            if (string.IsNullOrEmpty(inputModel.Keyword))
+            if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length > 200)
             {
-                return this.View();
+                return this.Error("Description is required and its length should be at most 200 characters.");
             }
 
-            var name = inputModel.Name;
-            var imageURL = inputModel.ImageURL;
-            var keyword = inputModel.Keyword;
-            var attack = inputModel.Attack;
-            var health = inputModel.Health;
-            var description = inputModel.Description;
-
-            var cardId = this.cardsService.AddCard(name, imageURL, keyword, attack, health, description);
-
-            string userId = this.User;
+            var cardId = this.cardsService.AddCard(model);
+            var userId = this.User;
             this.cardsService.AddCardToUserCollection(userId, cardId);
-            
-            return this.Redirect("/Cards/Cards/All");
+            return this.Redirect("/Cards/All");
         }
 
+        // /cards/all
         public HttpResponse All()
         {
             if (!this.IsUserLoggedIn())
