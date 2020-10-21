@@ -6,10 +6,8 @@
 
         void Register(string username, string email, string password);
 
-        bool UsernameExists(string username);
+        bool IsUsernameAvailable(string username);
 
-        bool EmailExists(string email);
-
-        void AddCard();
+        bool IsEmailAvailable(string email);
     }
 }

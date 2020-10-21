@@ -15,8 +15,6 @@
         public string Email { get; set; }
 
         [Required]
-        [MinLength(6)]
-        [MaxLength(20)]
         public string Password { get; set; }
 
         public IdentityRole Role { get; set; }

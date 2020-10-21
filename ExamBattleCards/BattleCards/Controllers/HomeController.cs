@@ -6,19 +6,12 @@
     public class HomeController : Controller
     { 
         [HttpGet("/")]
-        public HttpResponse IndexSlash()
-        {
-            return this.Index();
-        }
-
         public HttpResponse Index()
         {
-            //if (this.IsUserLoggedIn())
-            //{
-            //    var allProducts = productsService.GetAll();
-
-            //    return this.View(allProducts, "Home");
-            //}
+            if (this.IsUserLoggedIn())
+            {
+                return this.View("/Cards/All");
+            }
 
             return this.View();
         }
