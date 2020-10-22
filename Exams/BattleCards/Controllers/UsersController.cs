@@ -95,6 +95,7 @@
             return this.Redirect("/Users/Login");
         }
 
+        [HttpGet("/Logout")]
         public HttpResponse Logout()
         {
             if (!this.IsUserLoggedIn())

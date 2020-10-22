@@ -1,6 +1,5 @@
 ﻿namespace BattleCards.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -24,31 +23,9 @@
         [Required]
         public string Keyword { get; set; }
 
-        public int Attack 
-        {
-            get => this.Attack;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Attack cannot be less than 0");
-                }
+        public int Attack { get; set; }
 
-                this.Attack = value;
-            }
-        }
-
-        public int Health 
-        { 
-            get => this.Health;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Health cannot be less than 0");
-                }
-            }
-        }
+        public int Health { get; set; }
 
         [Required]
         [MaxLength(200)]

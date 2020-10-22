@@ -4,8 +4,10 @@
     using BattleCards.Models;
     using BattleCards.ViewModels.Cards;
     using Microsoft.EntityFrameworkCore.Internal;
+    using SIS.HTTP;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
 
     public class CardsService : ICardsService
     {
@@ -50,6 +52,19 @@
             this.dbContext.SaveChanges();
         }
 
+        public void RemoveCardFromUserCollection(string userId, int cardId)
+        {
+            if (!this.dbContext.UserCards.Any(x => x.UserId == userId && x.CardId == cardId))
+            {
+                return;
+            }
+
+            var userCard = this.dbContext.UserCards.FirstOrDefault(x => x.UserId == userId && x.CardId == cardId);
+
+            this.dbContext.UserCards.Remove(userCard);
+            this.dbContext.SaveChanges();
+        }
+
         public IEnumerable<CardViewModel> GetAll()
         {
             var allCardsInputModel = this.dbContext.Cards.Select(c => new CardViewModel
@@ -79,6 +94,6 @@
                     Keyword = x.Card.Keyword,
                     Id = x.CardId,
                 }).ToList();
-        }
+        }        
     }
 }
