@@ -17,6 +17,14 @@
 
         public HttpResponse All()
         {
+            
+            // Here has a problem
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            // ?? WHY this doesn't work ??
             //var cardsViewModel = this.cardsService.GetAll();
             //return this.View(cardsViewModel);
 
@@ -24,8 +32,11 @@
             {
                 AllCards = this.cardsService.GetAll().ToList(),
             };
+
             return this.View(allCards);
         }
+
+
 
     }
 }
