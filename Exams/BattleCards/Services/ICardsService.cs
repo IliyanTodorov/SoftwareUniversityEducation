@@ -7,5 +7,10 @@
     {
         IEnumerable<CardViewModel> GetAll();
 
+        IEnumerable<CardViewModel> GetUserCollection(string userId);
+
+        int AddCard(CardViewModel input, string userId);
+
+        void AddCardToUserCollection(string userId, int cardId);
     }
 }

@@ -17,8 +17,6 @@
 
         public HttpResponse All()
         {
-            
-            // Here has a problem
             if (!this.IsUserLoggedIn())
             {
                 return this.Redirect("/Users/Login");
@@ -36,7 +34,54 @@
             return this.View(allCards);
         }
 
+        public HttpResponse Collection(string userId)
+        {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
 
+            UserCardsCollectionViewModel cards = new UserCardsCollectionViewModel()
+            {
+                Cards = this.cardsService.GetUserCollection(this.User).ToList(),
+            };
 
+            return this.View(cards);
+        }
+
+        public HttpResponse Add()
+        {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            return this.View();
+        }
+
+        [HttpPost]
+        public HttpResponse Add(CardViewModel input)
+        {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            var cardId = this.cardsService.AddCard(input, this.User);
+            this.cardsService.AddCardToUserCollection(this.User, cardId);
+
+            return this.Redirect("/Cards/All");
+        }
+
+        public HttpResponse Logout()
+        {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            this.SignOut();
+            return this.Redirect("/");
+        }
     }
 }
