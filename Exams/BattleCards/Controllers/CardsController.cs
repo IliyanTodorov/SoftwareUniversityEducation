@@ -60,15 +60,16 @@
         }
 
         [HttpPost]
-        public HttpResponse Add(CardViewModel input)
+        public HttpResponse Add(AddCardInputModel input)
         {
             if (!this.IsUserLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            var cardId = this.cardsService.AddCard(input, this.User);
-            this.cardsService.AddCardToUserCollection(this.User, cardId);
+            var cardId = this.cardsService.AddCard(input);
+            var userId = this.User;
+            this.cardsService.AddCardToUserCollection(userId, cardId);
 
             return this.Redirect("/Cards/All");
         }

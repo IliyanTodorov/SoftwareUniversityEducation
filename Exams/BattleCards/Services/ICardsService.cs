@@ -9,7 +9,7 @@
 
         IEnumerable<CardViewModel> GetUserCollection(string userId);
 
-        int AddCard(CardViewModel input, string userId);
+        int AddCard(AddCardInputModel input);
 
         void AddCardToUserCollection(string userId, int cardId);
     }

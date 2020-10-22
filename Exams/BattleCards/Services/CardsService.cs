@@ -16,12 +16,12 @@
             this.dbContext = dbContext;
         }
 
-        public int AddCard(CardViewModel input, string userId)
+        public int AddCard(AddCardInputModel input)
         {
-            var card = new Card
+            Card card = new Card
             {
                 Name = input.Name,
-                ImageUrl = input.ImageURL,
+                ImageUrl = input.Image,
                 Keyword = input.Keyword,
                 Description = input.Description,
                 Attack = input.Attack,
